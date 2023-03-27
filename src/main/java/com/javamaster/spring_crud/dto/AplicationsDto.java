@@ -1,35 +1,39 @@
-package com.javamaster.spring_crud.entity;
+package com.javamaster.spring_crud.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
-
-@Entity
-@Table(name = "aplications_table")
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-public class Aplications {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AplicationsDto {
+
+
     private int id;
-    @Column
+
     private String owner;
 
-    @Column
     private String address;
 
-    @Column
     private LocalDate localDate;
-    @Column(name = "problem_type")
+
     private String problemType;
-    @Column
+
     private String operator;
-    @Column
+
     private int userId;
-    @Column
+
     private String electric;
+
+
 
 }

@@ -6,7 +6,7 @@ CREATE TABLE aplications_table
     localDate    timestamp,
     problem_type text,
     operator     text,
-    telefon      text,
+    user_id      int,
     electric     text
 
 

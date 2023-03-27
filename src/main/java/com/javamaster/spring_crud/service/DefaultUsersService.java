@@ -4,6 +4,8 @@ import com.javamaster.spring_crud.dto.UsersDto;
 import com.javamaster.spring_crud.entity.Users;
 import com.javamaster.spring_crud.exception.ValidationException;
 import com.javamaster.spring_crud.repository.UsersRepository;
+import converter.AplicationsConverter;
+import converter.UsersConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
