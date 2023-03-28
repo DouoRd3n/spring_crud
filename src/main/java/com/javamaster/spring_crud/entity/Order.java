@@ -8,10 +8,10 @@ import java.time.LocalDate;
 
 
 @Entity
-@Table(name = "aplications_table")
+@Table(name = "order_table")
 @Data
 @NoArgsConstructor
-public class Aplications {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -21,7 +21,7 @@ public class Aplications {
     @Column
     private String address;
 
-    @Column
+    @Column(name = "local_date")
     private LocalDate localDate;
     @Column(name = "problem_type")
     private String problemType;

@@ -1,4 +1,4 @@
-CREATE TABLE aplications_table
+CREATE TABLE order_table
 (
     id           SERIAL primary key,
     owner        text,

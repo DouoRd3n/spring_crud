@@ -1,4 +1,4 @@
-package converter;
+package com.javamaster.spring_crud.converter;
 
 import com.javamaster.spring_crud.dto.UsersDto;
 import com.javamaster.spring_crud.entity.Users;
