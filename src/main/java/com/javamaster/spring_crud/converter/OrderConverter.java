@@ -8,17 +8,17 @@ public class OrderConverter {
 
 
     public Order fromOrderDtoToOrder(OrderDto orderDto){
-        Order aplication = new Order();
-         aplication.setId(aplication.getId());
-         aplication.setOwner(orderDto.getOwner());
-         aplication.setAddress(orderDto.getAddress());
-         aplication.setLocalDate(orderDto.getLocalDate());
-         aplication.setProblemType(aplication.getProblemType());
-         aplication.setOperator(aplication.getOperator());
-         aplication.setUserId(orderDto.getUserId());
-         aplication.setElectric(orderDto.getElectric());
+        Order order = new Order();
+         order.setId(order.getId());
+         order.setOwner(orderDto.getOwner());
+         order.setAddress(orderDto.getAddress());
+         order.setLocalDate(orderDto.getLocalDate());
+         order.setProblemType(orderDto.getProblemType());
+         order.setOperator(orderDto.getOperator());
+         order.setUserId(orderDto.getUserId());
+         order.setElectric(orderDto.getElectric());
 
-        return aplication;
+        return order;
     }
 
     public OrderDto fromOrderToOrderDTO(Order order){
