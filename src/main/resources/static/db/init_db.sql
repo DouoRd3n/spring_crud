@@ -10,7 +10,8 @@ CREATE TABLE order_table
     who_created_the_application               text,
     electrician_that_accepted_the_application text,
     application_result                        text,
-    note                                      text
+    note                                      text,
+    user_id                                   int
 
 
 )
