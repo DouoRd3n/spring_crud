@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import java.time.LocalDate;
 
 @Data
@@ -16,20 +17,27 @@ public class OrderDto {
 
     private int id;
 
-    private String owner;
+    private String plumes;
 
-    private String address;
+    private String referral;
 
-    private LocalDate localDate;
+    private String objectName;
 
-    private String problemType;
+    private String objectAdress;
 
-    private String operator;
+    private LocalDate applicationDate;
+
+    private String theReasonForTheApplication;
+
+    private String whoCreatedTheApplication;
+
+    private String electricianThatAcceptedTheApplication;
+
+    private String applicationResult;
+
+    private String note;
 
     private int userId;
-
-    private String electric;
-
 
 
 }

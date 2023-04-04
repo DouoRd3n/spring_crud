@@ -9,14 +9,17 @@ public class OrderConverter {
 
     public Order fromOrderDtoToOrder(OrderDto orderDto){
         Order order = new Order();
-         order.setId(order.getId());
-         order.setOwner(orderDto.getOwner());
-         order.setAddress(orderDto.getAddress());
-         order.setLocalDate(orderDto.getLocalDate());
-         order.setProblemType(orderDto.getProblemType());
-         order.setOperator(orderDto.getOperator());
+         order.setId(orderDto.getId());
+         order.setPlumes(orderDto.getPlumes());
+         order.setReferral(orderDto.getReferral());
+         order.setObjectAdress(orderDto.getObjectAdress());
+         order.setApplicationDate(orderDto.getApplicationDate());
+         order.setTheReasonForTheApplication(orderDto.getTheReasonForTheApplication());
+         order.setWhoCreatedTheApplication(orderDto.getWhoCreatedTheApplication());
+         order.setElectricianThatAcceptedTheApplication(orderDto.getElectricianThatAcceptedTheApplication());
+         order.setApplicationResult(orderDto.getApplicationResult());
+         order.setNote(orderDto.getNote());
          order.setUserId(orderDto.getUserId());
-         order.setElectric(orderDto.getElectric());
 
         return order;
     }
@@ -26,13 +29,17 @@ public class OrderConverter {
 
         return OrderDto.builder()
                 .id(order.getId())
-                .owner(order.getOwner())
-                .address(order.getAddress())
-                .localDate(order.getLocalDate())
-                .problemType(order.getProblemType())
-                .operator(order.getOperator())
+                .plumes(order.getPlumes())
+                .referral(order.getReferral())
+                .objectName(order.getObjectName())
+                .objectAdress(order.getObjectAdress())
+                .applicationDate(order.getApplicationDate())
+                .theReasonForTheApplication(order.getTheReasonForTheApplication())
+                .whoCreatedTheApplication(order.getWhoCreatedTheApplication())
+                .electricianThatAcceptedTheApplication(order.getElectricianThatAcceptedTheApplication())
+                .applicationResult(order.getApplicationResult())
+                .note(order.getNote())
                 .userId(order.getUserId())
-                .electric(order.getElectric())
                 .build();
     }
 }
