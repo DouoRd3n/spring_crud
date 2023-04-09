@@ -51,7 +51,7 @@ public class DefaultOrderService implements OrderService {
         if (isNull(orderDto)) {
             throw new ValidationException("Object aplication is null");
         }
-        if (isNull(orderDto.getAddress()) || orderDto.getAddress().isEmpty()) {
+        if (isNull(orderDto.getObjectAdress()) || orderDto.getObjectAdress().isEmpty()) {
             throw new ValidationException("address is empty");
         }
     }

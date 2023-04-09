@@ -23,23 +23,32 @@
 </head>
 <body>
 
-<h2>Order Table</h2>
+<h2>Заявки</h2>
+
+<form actions="#">
+    <input id="order_referral" placeholder="Направлення">
+    <input id="order_plumes" placeholder="ШС">
+    <input id="order_objectName" placeholder="Назва обєкту">
+    <input id="order_objectAdress" placeholder=">Адресса обєкта">
+    <input type="date" id="order_application_date" placeholder="Дата заявки">
+    <input id="order_problem_type" placeholder="Причина заявки">
+    <input id="order_operator" placeholder="Хто сформував заявку">
+    <input id="order_electric" placeholder="Електрик що прийняв заявку">
+    <input id="order_result" placeholder="Результат відпрацювання заявки">
+    <input id="order_note" placeholder="Нотатки">
+
+
+    <button onclick="createOrder()">Create order</button>
+
+</form>
+
+
 
 <a href="users.html">users</a>
 <table id="ordersTable">
 </table>
 
-    <form actions="#">
-        <input id="order_owner" placeholder="Order owner">
-        <input id="order_address" placeholder="Order address">
-        <input type="date" id="order_local_date" placeholder="Order local_date">
-        <input id="order_problem_type" placeholder="Order problem_type">
-        <input id="order_operator" placeholder="Order operator">
-        <input id="order_user_id" placeholder="Order user_id">
-        <input id="order_electric" placeholder="Order electric">
-        <button onclick="createOrder()">Create order</button>
-        <input>
-    </form>
+
 
 <script>
 
@@ -47,63 +56,81 @@
         var xhttp = new XMLHttpRequest();
         xhttp.open("DELETE", "http://localhost:8080/order/delete/" + orderId, true);
         xhttp.send();
+
+        loadOrder()
     }
 
     function createOrder() {
-        var orderOwner = document.getElementById("order_owner").value;
-        var orderAddress = document.getElementById("order_address").value;
-        var orderLocalDate = document.getElementById("order_local_date").value;
+        var orderPlumes = document.getElementById("order_plumes").value;
+        var orderReferral = document.getElementById("order_referral").value;
+        var orderName = document.getElementById("order_objectName").value;
+        var orderAdress = document.getElementById("order_objectAdress").value;
+        var orderLocalDate = document.getElementById("order_application_date").value;
         var orderProblemType = document.getElementById("order_problem_type").value;
         var orderOperator = document.getElementById("order_operator").value;
-        var orderUserId = document.getElementById("order_user_id").value;
-        var orderElectric = document.getElementById("order_electric").value;
+        var orderElecric = document.getElementById("order_electric").value;
+        var orderResult = document.getElementById("order_result").value;
+        var orderNote = document.getElementById("order_note").value;
 
         var xmlhttp = new XMLHttpRequest("POST", "http://localhost:8080/order/save");
         xmlhttp.open("POST", "http://localhost:8080/order/save");
         xmlhttp.setRequestHeader("Content-Type", "application/json");
         xmlhttp.send(JSON.stringify({
-            owner: orderOwner, address: orderAddress,
-            localDate: orderLocalDate, problemType: orderProblemType,
-            operator: orderOperator, userId: orderUserId, electric: orderElectric
+            referral: orderReferral, plumes: orderPlumes,
+            orderName: orderName, objectAdress: orderAdress, applicationDate: orderLocalDate,
+            theReasonForTheApplication: orderProblemType, whoCreatedTheApplication: orderOperator,
+            electricianThatAcceptedTheApplication: orderElecric, applicationResult: orderResult, note: orderNote
         }))
 
-      loadOrder()
+        loadOrder()
     }
+
 
     function loadOrder() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var orders = JSON.parse(this.responseText);
-                var html =  '<tr>\n' +
-                            '<th>Order id</th>\n' +
-                            '<th>Order owner</th>\n' +
-                            '<th>Order address</th>\n' +
-                            '<th>Order localDate</th>\n' +
-                            '<th>Order problemType</th>\n' +
-                            '<th>Order operator</th>\n' +
-                            '<th>Order electric</th>\n' +
-                            '</tr>'
-                for (var i = 0; i < orders.length; i++){
-                var order = orders[i];
-                console.log(order)
-                html = html + '<tr>\n' +
-                    '<td>' + order.id + '</td>\n' +
-                    '<td>' + order.owner + '</td>\n' +
-                    '<td>' + order.address + '</td>\n' +
-                    '<td>' + order.localDate + '</td>\n' +
-                    '<td>' + order.problemType + '</td>\n' +
-                    '<td>' + order.operator + '</td>\n' +
-                    '<td>' + order.electric + '</td>\n' +
-                    '<td><button onclick="deleteOrder(' + order.id + ')">Delete</button></td></tr>';
+                var html = '<tr>\n' +
+                    '<th>Order id</th>\n' +
+                    '<th> Направлення </th>\n' +
+                    '<th>ШС</th>\n' +
+                    '<th>Назва обєкту</th>\n' +
+                    '<th>Адресса обєкта</th>\n' +
+                    '<th>Дата заявки</th>\n' +
+                    '<th>Причина заявки</th>\n' +
+                    '<th>Хто сформував заявку</th>\n' +
+                    '<th>Електрик що прийняв заявку</th>\n' +
+                    '<th>Результат відпрацювання заявки</th>\n' +
+                    '<th>Нотатки</th>\n' +
+                    '</tr>'
+                for (var i = 0; i < orders.length; i++) {
+                    var order = orders[i];
+
+                    console.log(order)
+                    html = html + '<tr>\n' +
+                        '<td>' + order.id + '</td>\n' +
+                        '<td>' + order.referral + '</td>\n' +
+                        '<td>' + order.plumes + '</td>\n' +
+                        '<td>' + order.orderName + '</td>\n' +
+                        '<td>' + order.objectAdress + '</td>\n' +
+                        '<td>' + order.applicationDate + '</td>\n' +
+                        '<td>' + order.theReasonForTheApplication + '</td>\n' +
+                        '<td>' + order.whoCreatedTheApplication + '</td>\n' +
+                        '<td>' + order.electricianThatAcceptedTheApplication + '</td>\n' +
+                        '<td>' + order.applicationResult + '</td>\n' +
+                        '<td>' + order.note + '</td>\n' +
+                        '<td><button onclick="deleteOrder(' + order.id + ')">Delete</button></td></tr>';
+
+
 
                 }
                 document.getElementById("ordersTable").innerHTML = html;
             }
-            };
+        };
         xhttp.open("GET", "http://localhost:8080/order/findAll", true);
         xhttp.send();
-        }
+    }
 
 
     loadOrder();

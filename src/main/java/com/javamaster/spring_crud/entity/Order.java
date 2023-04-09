@@ -15,13 +15,15 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
-    private String plumes;
+
     @Column
     private String referral;
+
     @Column
+    private String plumes;
+    @Column(name = "object_name")
     private String objectName;
-    @Column
+    @Column(name = "object_adress")
     private String objectAdress;
     @Column(name = "application_date")
     private LocalDate applicationDate;
