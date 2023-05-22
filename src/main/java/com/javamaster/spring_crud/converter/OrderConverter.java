@@ -12,6 +12,7 @@ public class OrderConverter {
          order.setId(orderDto.getId());
          order.setPlumes(orderDto.getPlumes());
          order.setReferral(orderDto.getReferral());
+         order.setObjectName(orderDto.getObjectName());
          order.setObjectAdress(orderDto.getObjectAdress());
          order.setApplicationDate(orderDto.getApplicationDate());
          order.setTheReasonForTheApplication(orderDto.getTheReasonForTheApplication());

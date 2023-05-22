@@ -1,47 +1,56 @@
 package com.javamaster.spring_crud.controller;
 
 import com.javamaster.spring_crud.dto.OrderDto;
+import com.javamaster.spring_crud.entity.Order;
 import com.javamaster.spring_crud.exception.ValidationException;
 import com.javamaster.spring_crud.service.OrderService;
-import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/order")
-@AllArgsConstructor
-@Log
-@CrossOrigin
+@Controller
 public class OrderController {
 
-    private final OrderService orderService;
+    @Autowired
+    private OrderService orderService;
 
-    @PostMapping("/save")
-    public OrderDto saveOrder(@RequestBody OrderDto orderDto) throws ValidationException{
-        log.info("HandLing save aplication" + orderDto);
-        return orderService.saveOrder(orderDto);
+    @GetMapping("/")
+    public String viewHomePage(Model model) {
+        return findPaginated(1,  model);
     }
 
+    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+        int pageSize = 5;
 
-    @GetMapping("/findAllByUserId/{userId}")
-    public List<OrderDto> findAllByUserId(@PathVariable Integer userId){
-        log.info("Handing find all by userId request" + userId );
-        return orderService.findAllByUser(userId);
+        Page<OrderDto> page = orderService.findPaginated(pageNo, pageSize, "applicationDate", "asc");
+        List<OrderDto> listOrder = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+
+        model.addAttribute("listOrder", listOrder);
+
+        return "index";
     }
 
-    @GetMapping("/findAll")
-    public List<OrderDto> findAll(){
-        log.info("Handling find all aplications request");
-        return orderService.findAll();
+    @GetMapping("/showNewOrderForm")
+    public String showNewOrderForm(Model model) {
+        // create model attribute to bind form data
+        OrderDto orderDto = new OrderDto();
+        model.addAttribute("order", orderDto);
+        return "new_order";
     }
+    @PostMapping("/saveOrder")
+    public String saveOrder(@ModelAttribute("order") OrderDto orderDto) throws ValidationException {
 
-    @DeleteMapping("/delete/{OrderId}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable Integer OrderId){
-        log.info("Handling delete aplication request: " + OrderId);
-        orderService.deleteOrder(OrderId);
-        return ResponseEntity.ok().build();
+        orderService.saveOrder(orderDto);
+        return "redirect:/";
     }
 }

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container my-2">
+        <h1> Order List</h1>
+
+        <a th:href = "@{/showNewOrderForm}" class="btn btn-primary btn-sm mb-3"> Add Order</a>
+         <table border="1" class="table table-striped table-responsive-md">
+             <thead>
+             <tr>
+                 <th>
+                     <a th:href="@{'/page/' + ${currentPage}}">Направлення</a>
+                 </th>
+                 <th>
+                     <a th:href="@{'/page/' + ${currentPage}}">ШС</a>
+                 </th>
+                 <th>
+                     <a th:href="@{'/page/' + ${currentPage}}">Назва обєкту</a>
+                 </th>
+                 <th>
+                     <a th:href="@{'/page/' + ${currentPage}}">Адресса обєкта</a>
+                 </th>
+                 <th>
+                     <a th:href="@{'/page/' + ${currentPage}}">Дата заявки</a>
+                 </th>
+                 <th>
+                     <a th:href="@{'/page/' + ${currentPage}}">Причина заявки</a>
+                 </th>
+                 <th>
+                     <a th:href="@{'/page/' + ${currentPage}}">Хто сформував заявку</a>
+                 </th>
+                 <th>
+                     <a th:href="@{'/page/' + ${currentPage}}">Електрик що прийняв заявку</a>
+                 </th>
+                 <th>
+                     <a th:href="@{'/page/' + ${currentPage}}">Результат відпрацювання заявки</a>
+                 </th>
+                 <th>
+                     <a th:href="@{'/page/' + ${currentPage}}">Нотатки</a>
+                 </th>
+                 <th>Actions</th>
+             </tr>
+             </thead>
+             <tbody>
+             <tr th:each = "order : ${listOrder}">
+                 <td th:text = "${order.referral}"></td>
+                 <td th:text = "${order.plumes}"></td>
+                 <td th:text = "${order.objectName}"></td>
+                 <td th:text = "${order.objectAdress}"></td>
+                 <td type="data" th:text = "${order.applicationDate}"></td>
+                 <td th:text = "${order.theReasonForTheApplication}"></td>
+                 <td th:text = "${order.whoCreatedTheApplication}"></td>
+                 <td th:text = "${order.electricianThatAcceptedTheApplication}"></td>
+                 <td th:text = "${order.applicationResult}"></td>
+                 <td th:text = "${order.note}"></td>
+                 <td> <a th:href="@{/showFormForUpdate/{id}(id=${order.id})}" class="btn btn-primary">Update</a>
+                     <a th:href="@{/deleteorder/{id}(id=${order.id})}" class="btn btn-danger">Delete</a>
+                 </td>
+
+
+             </tr>
+             </tbody>
+         </table>
+        <div th:if = "${totalPages > 1}">
+            <div class = "row col-sm-10">
+                <div class = "col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+                </div>
+                <div class = "col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

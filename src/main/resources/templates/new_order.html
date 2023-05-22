@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>Order Management System</h1>
+    <hr>
+    <h2>Save Order</h2>
+
+    <form action="#" th:action="@{/saveOrder}" th:object="${order}" method="POST">
+        <input type="text" th:field="*{referral}" placeholder="Направлення" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{plumes}" placeholder="ШС" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{objectName}" placeholder="Назва обєкту" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{objectAdress}" placeholder="Адресса обєкта"
+               class="form-control mb-4 col-4">
+        <input type="date" th:field="*{applicationDate}" placeholder="Дата заявки"
+               class="form-control mb-4 col-4">
+        <input type="text" th:field="*{theReasonForTheApplication}" placeholder="Причина заявки"
+               class="form-control mb-4 col-4">
+        <input type="text" th:field="*{whoCreatedTheApplication}" placeholder="Хто сформував заявку"
+               class="form-control mb-4 col-4">
+        <input type="text" th:field="*{electricianThatAcceptedTheApplication}"
+               placeholder="Електрик що прийняв заявку" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{applicationResult}" placeholder="Результат відпрацювання заявки"
+               class="form-control mb-4 col-4">
+        <input type="text" th:field="*{note}" placeholder="Нотатки" class="form-control mb-4 col-4">
+        <button type="submit" class="btn btn-info col-2"> Save Order</button>
+    </form>
+    <hr>
+    <a th:href="@{/}"> Back to Order List</a>
+</div>
+</body>
+</html>

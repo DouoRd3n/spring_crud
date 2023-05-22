@@ -26,7 +26,8 @@
 <h2>Заявки</h2>
 
 <form actions="#">
-    <input id="order_referral" placeholder="Направлення">
+    <input type="hidden" th:field="*{id} "/>
+    <input id="order_referral" th:=""  placeholder="Направлення">
     <input id="order_plumes" placeholder="ШС">
     <input id="order_objectName" placeholder="Назва обєкту">
     <input id="order_objectAdress" placeholder=">Адресса обєкта">
@@ -59,6 +60,15 @@
 
         loadOrder()
     }
+
+    function updateOrder(orderId, electricianThatAcceptedTheApplication, applicationResult ) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("DELETE", "http://localhost:8080/order/update/" + orderId, true);
+        xhttp.send();
+
+        loadOrder()
+    }
+
 
     function createOrder() {
         var orderPlumes = document.getElementById("order_plumes").value;
@@ -103,6 +113,7 @@
                     '<th>Електрик що прийняв заявку</th>\n' +
                     '<th>Результат відпрацювання заявки</th>\n' +
                     '<th>Нотатки</th>\n' +
+                    '<th></th>\n' +
                     '</tr>'
                 for (var i = 0; i < orders.length; i++) {
                     var order = orders[i];
@@ -120,7 +131,8 @@
                         '<td>' + order.electricianThatAcceptedTheApplication + '</td>\n' +
                         '<td>' + order.applicationResult + '</td>\n' +
                         '<td>' + order.note + '</td>\n' +
-                        '<td><button onclick="deleteOrder(' + order.id + ')">Delete</button></td></tr>';
+                        '<td><button onclick="deleteOrder(\' + order.id + \')">Delete</button> ' +
+                        '<button onclick="updateOrder(order)">Delete</button>\'</td></tr>';
 
 
 

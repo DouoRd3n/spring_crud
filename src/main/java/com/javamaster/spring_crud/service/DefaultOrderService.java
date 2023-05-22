@@ -9,6 +9,10 @@ import com.javamaster.spring_crud.converter.OrderConverter;
 import lombok.AllArgsConstructor;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,4 +71,14 @@ public class DefaultOrderService implements OrderService {
                 .map(orderConverter::fromOrderToOrderDTO)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Page<OrderDto> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.orderRepository.findAll(pageable).map(orderConverter::fromOrderToOrderDTO);
+    }
+
+
 }
