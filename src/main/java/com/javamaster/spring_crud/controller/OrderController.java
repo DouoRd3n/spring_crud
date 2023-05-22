@@ -53,4 +53,22 @@ public class OrderController {
         orderService.saveOrder(orderDto);
         return "redirect:/";
     }
+    @GetMapping("/deleteOrder/{id}")
+    public String deleteOrder(@PathVariable (value = "id") int id) {
+
+        // call delete order method
+        this.orderService.deleteOrder(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/showFormForUpdate/{id}")
+    public String showFormForUpdate(@PathVariable ( value = "id") int id, Model model) {
+
+        // get employee from the service
+        OrderDto orderDto = orderService.findOrder(id);
+
+        // set employee as a model attribute to pre-populate the form
+        model.addAttribute("order", orderDto);
+        return "update_order";
+    }
 }

@@ -10,6 +10,8 @@ public interface OrderService {
 
     OrderDto saveOrder(OrderDto orderDto) throws ValidationException;
 
+    OrderDto findOrder(Integer id );
+
     void deleteOrder(Integer orderId);
 
 //    Aplications getAplication(Integer aplicationId);

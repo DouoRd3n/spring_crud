@@ -2,7 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+
     <title>Title</title>
+
+    <style>
+        table {
+            table-layout: fixed;
+            width:100%
+        }
+        td {
+            word-wrap:break-word;
+        }
+    </style>
 </head>
 <body>
     <div class="container my-2">
@@ -12,37 +23,37 @@
          <table border="1" class="table table-striped table-responsive-md">
              <thead>
              <tr>
-                 <th>
-                     <a th:href="@{'/page/' + ${currentPage}}">Направлення</a>
-                 </th>
-                 <th>
+                 <th style="width:75px;">
+                     <a th:href="@{'/page/' + ${currentPage}}"> </a>
+                 </th >
+                 <th style="width:75px;">
                      <a th:href="@{'/page/' + ${currentPage}}">ШС</a>
                  </th>
-                 <th>
+                 <th style="width:125px;">
                      <a th:href="@{'/page/' + ${currentPage}}">Назва обєкту</a>
                  </th>
-                 <th>
+                 <th style="width:150px;">
                      <a th:href="@{'/page/' + ${currentPage}}">Адресса обєкта</a>
                  </th>
-                 <th>
+                 <th style="width:100px;">
                      <a th:href="@{'/page/' + ${currentPage}}">Дата заявки</a>
                  </th>
-                 <th>
+                 <th style="width:125px;">
                      <a th:href="@{'/page/' + ${currentPage}}">Причина заявки</a>
                  </th>
-                 <th>
-                     <a th:href="@{'/page/' + ${currentPage}}">Хто сформував заявку</a>
+                 <th style="width:100px;">
+                     <a th:href="@{'/page/' + ${currentPage}}">Оператор</a>
                  </th>
-                 <th>
-                     <a th:href="@{'/page/' + ${currentPage}}">Електрик що прийняв заявку</a>
+                 <th style="width:100px;">
+                     <a th:href="@{'/page/' + ${currentPage}}">Електрик</a>
                  </th>
-                 <th>
+                 <th style="width:200px;" >
                      <a th:href="@{'/page/' + ${currentPage}}">Результат відпрацювання заявки</a>
                  </th>
-                 <th>
+                 <th style="width:225px;">
                      <a th:href="@{'/page/' + ${currentPage}}">Нотатки</a>
                  </th>
-                 <th>Actions</th>
+                 <th style="width:100px;">Actions</th>
              </tr>
              </thead>
              <tbody>
@@ -58,7 +69,8 @@
                  <td th:text = "${order.applicationResult}"></td>
                  <td th:text = "${order.note}"></td>
                  <td> <a th:href="@{/showFormForUpdate/{id}(id=${order.id})}" class="btn btn-primary">Update</a>
-                     <a th:href="@{/deleteorder/{id}(id=${order.id})}" class="btn btn-danger">Delete</a>
+
+                     <a th:href="@{/deleteOrder/{id}(id=${order.id})}" class="btn btn-danger">Delete    </a>
                  </td>
 
 

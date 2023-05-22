@@ -13,9 +13,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
@@ -37,6 +39,18 @@ public class DefaultOrderService implements OrderService {
         Order savedAplication = orderRepository.save(orderConverter.fromOrderDtoToOrder(orderDto));
 
         return orderConverter.fromOrderToOrderDTO(savedAplication);
+    }
+
+    @Override
+    public OrderDto findOrder(Integer id) {
+        Optional<Order> optional = orderRepository.findById(id);
+        Order order = null;
+        if (optional.isPresent()){
+            order = optional.get();
+        }else {
+            throw new RuntimeException(" Order not found for id :: " + id);
+        }
+        return orderConverter.fromOrderToOrderDTO(order)  ;
     }
 
     @Override
@@ -79,6 +93,8 @@ public class DefaultOrderService implements OrderService {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return this.orderRepository.findAll(pageable).map(orderConverter::fromOrderToOrderDTO);
     }
+
+
 
 
 }
